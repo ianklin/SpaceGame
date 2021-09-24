@@ -1,6 +1,6 @@
 class Background extends GameObject{
   public Background(){
-    super(400,400,800,1400, "spacebackground");
+    super(400,400,800,1400, "spacebackground", "Background");
   }
   public void update(){
     move();

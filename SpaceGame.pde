@@ -15,10 +15,11 @@ void setup(){
   Background b2 = new Background();
   b2.y = -700;
   new Player();
+  new Enemy1();
 }
 void draw(){
   loopAllObjects();
-  resetKeys();
+  //resetKeys();
 }
 
 void loopAllObjects(){
@@ -51,4 +52,30 @@ void keyPressed(){
   if(keyCode == 32){
     spaceKey = true;
   }
+}
+
+void keyReleased(){
+  if(keyCode == UP){
+    upKey = false;
+  }
+  if(keyCode == DOWN){
+    downKey = false;
+  }
+  if(keyCode == LEFT){
+    leftKey = false;
+  }
+  if(keyCode == RIGHT){
+    rightKey = false;
+  }
+  if(keyCode == 32){
+    spaceKey = false;
+  }
+}
+
+public float distance(GameObject a, GameObject b){
+  float distanceX;
+  float distanceY;
+  distanceX = a.x - b.x; 
+  distanceY = a.y - b.y;
+  return sqrt(distanceX*distanceX + distanceY*distanceY);
 }
