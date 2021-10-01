@@ -24,8 +24,8 @@ class GameObject{
     image(sprite,x-w/2,y-h/2,w,h);
   }
   public void parentUpdate(){
-    update();
     show();
+    update();
   }
   public void update(){
     

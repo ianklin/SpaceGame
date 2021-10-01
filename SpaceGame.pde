@@ -1,6 +1,8 @@
 HashMap<String,PImage> imageMap = new HashMap<String,PImage>();
 ArrayList<GameObject> objects = new ArrayList<GameObject>();
 boolean upKey,downKey,leftKey,rightKey,spaceKey;
+int points;
+Spawner spawn;
 void setup(){
   size(800,800);
   String filepath = sketchPath();
@@ -15,10 +17,12 @@ void setup(){
   Background b2 = new Background();
   b2.y = -700;
   new Player();
-  new Enemy1();
+  spawn = new Spawner();
+  points = 0;
 }
 void draw(){
   loopAllObjects();
+  spawn.update();
   //resetKeys();
 }
 

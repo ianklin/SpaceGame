@@ -1,15 +1,20 @@
 class Player extends GameObject{
   boolean canShoot;
   int timePassed;
+  int hp;
   public Player(){
     super(400,600,50,50,"player", "Player");
     canShoot = true;
     timePassed = 0;
+    hp = 20;
   }
   public void update(){
+    text("Points: " + points, 50, 50);
     move();
+    hit();
+    drawHP();
     shoot();
-    reload(1000);
+    reload(800);
   }
   public void move(){
     if(upKey){
@@ -36,5 +41,22 @@ class Player extends GameObject{
       timePassed = millis();
       canShoot = true;
     }
+  }
+  public void hit(){
+    for(int i = 0; i < objects.size(); i++){
+      if(objects.get(i).type == "Enemy Missle" && distance(this, objects.get(i)) <= this.w/2 + objects.get(i).w/2){
+        objects.remove(objects.get(i));
+        hp -= random(1,5);
+        if(hp<=0){
+          objects.remove(this);
+          text("You Lost!",380,400,1000,1000);
+          noLoop();
+        }
+      }
+    }
+  }
+  public void drawHP(){
+    fill(0,255,0);
+    rect(x-50, y-35, hp*5, 10);
   }
 }
