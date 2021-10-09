@@ -44,11 +44,13 @@ class Player extends GameObject{
   }
   public void hit(){
     for(int i = 0; i < objects.size(); i++){
-      if(objects.get(i).type == "Enemy Missle" && distance(this, objects.get(i)) <= this.w/2 + objects.get(i).w/2){
+      if((objects.get(i).type == "Enemy Missle" || objects.get(i).type == "Enemy 1") && distance(this, objects.get(i)) <= this.w/2 + objects.get(i).w/2){
         objects.remove(objects.get(i));
         hp -= random(1,5);
         if(hp<=0){
+          hp = 0;
           objects.remove(this);
+          fill(255,255,255);
           text("You Lost!",380,400,1000,1000);
           noLoop();
         }

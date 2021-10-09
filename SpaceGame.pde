@@ -2,6 +2,7 @@ HashMap<String,PImage> imageMap = new HashMap<String,PImage>();
 ArrayList<GameObject> objects = new ArrayList<GameObject>();
 boolean upKey,downKey,leftKey,rightKey,spaceKey;
 int points;
+Player player1;
 Spawner spawn;
 void setup(){
   size(800,800);
@@ -9,20 +10,23 @@ void setup(){
   File sprites = new File(filepath+"/images");
   String[] spriteKeys = sprites.list();
   for(int i = 0;i<spriteKeys.length;i++){
-    PImage s = loadImage("images/"+spriteKeys[i]);
-    imageMap.put(spriteKeys[i].substring(0,spriteKeys[i].length()-4),s);
+    if(spriteKeys[i] != "./DS_Store"){
+      PImage s = loadImage("images/"+spriteKeys[i]);
+      imageMap.put(spriteKeys[i].substring(0,spriteKeys[i].length()-4),s);
+    }
   }
   Background b1 = new Background();
   b1.y = 100;
   Background b2 = new Background();
   b2.y = -700;
-  new Player();
-  spawn = new Spawner();
+  player1 = new Player();
+  //spawn = new Spawner();
+  new Boss(player1);
   points = 0;
 }
 void draw(){
   loopAllObjects();
-  spawn.update();
+  //spawn.update();
   //resetKeys();
 }
 
