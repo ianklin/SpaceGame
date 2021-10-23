@@ -19,7 +19,7 @@ class Boss extends GameObject{
   float speedX, speedY;
   public Boss(GameObject target){
     super(400,-100,250,250,"boss", "Boss");
-    hp = 50;
+    hp = 75;
     currentMove = BossMoves.MOVEDOWN;
     speedX = 5;
     speedY = 0;
@@ -40,9 +40,11 @@ class Boss extends GameObject{
       if (millis() - timePassed >= waitTime){
         randomizeMove();
       }
-      if (x <= 200){
+      if (x < 200){
+        x = 200;
         speedX *= -1;
-      } if (x >= 600){
+      } if (x > 600){
+        x = 600;
         speedX *= -1;
       }
       x += speedX;
@@ -57,6 +59,11 @@ class Boss extends GameObject{
       returnUp();
     } else if(currentMove == BossMoves.TRACKPLAYER){
       trackPlayer();
+    } else if(currentMove == BossMoves.DEAD){
+      objects.remove(this);
+      fill(255,255,255);
+      text("You Won!",380,400,1000,1000);
+      noLoop();
     }
     hit();
     drawHP();
@@ -70,6 +77,7 @@ class Boss extends GameObject{
     }
      if(hp<=0){
        hp = 0;
+       currentMove = BossMoves.DEAD;
      }
   }
   public void randomizeMove(){
@@ -146,6 +154,6 @@ class Boss extends GameObject{
   }
   public void drawHP(){
     fill(0,255,0);
-    rect(x-125, y-135, hp*5, 10);
+    rect(x-200, y-135, hp*5, 10);
   }
 }

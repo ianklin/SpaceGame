@@ -20,7 +20,7 @@ class Enemy2 extends GameObject{
       if (objects.get(i).type == "Missle" && distance(this, objects.get(i)) <= this.w/2 + objects.get(i).w/2){
         objects.remove(objects.get(i));
         objects.remove(this);
-        points += 100;
+        points += 50;
       }
     }
   }

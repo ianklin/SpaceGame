@@ -2,32 +2,36 @@ class Spawner{
   boolean canSpawn;
   int timePassed;
   float respawnTime;
-  //Class c;
-  public Spawner(){
+  boolean boss;
+  boolean spawnerRunning;
+  String spawnEntity;
+  int min, max;
+  public Spawner(String spawnEntity){
+    boss = false;
+    spawnerRunning = true;
     canSpawn=true;
     timePassed=0;
-    respawnTime=random(1000,1300);
-    //c=gameObject;
+    min = 1000;
+    max = 1300;
+    respawnTime=random(min,max);
+    this.spawnEntity = spawnEntity;
   }
   public void update(){
-    timer();
+    if(spawnerRunning){
+      timer();
+    }
     if(canSpawn){
-      //new c();
-      //try{c.newInstance();
-      //}
-      //catch(InstantiationException ex){
-      //  print(ex);
-      //}
-      //catch(IllegalAccessException ex){
-      //  print(ex);
-      //}
-      if(random(1,3) >= 2){
-        new Enemy1();
-      } else {
-        new Enemy2();
+      switch (spawnEntity){
+        case "enemy1":
+          new Enemy1();
+          break;
+        case "enemy2":
+          new Enemy2();
+          break;
       }
       canSpawn=false;
-      respawnTime=random(1000,1300);
+      
+      respawnTime=random(min,max);
     }
   }
   public void timer(){
