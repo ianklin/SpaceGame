@@ -34,14 +34,13 @@ void setup(){
   spawn = new Spawner("enemy2");
   spawn2 = new Spawner("enemy1");
   //new Boss(player1);
-  currentState = levels.LEVEL4;
-  new Boss(player1);
+  currentState = levels.LEVEL1;
   points = 0;
 }
 void draw(){
   loopAllObjects();
   
-  //spawn.update();
+  spawn.update(); 
   switch (currentState){
     case LEVEL1:
     //just enemy2 

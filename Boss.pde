@@ -93,6 +93,7 @@ class Boss extends GameObject{
       this.speedX = (target.x - x)/10;
       this.speedY = (target.y - y)/10;
       currentMove = BossMoves.COLLIDE;
+      print("collision occured ");
     } if (randint == 3){
       timePassed = millis();
       currentMove = BossMoves.TRACKPLAYER;

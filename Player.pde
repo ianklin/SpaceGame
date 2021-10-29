@@ -1,12 +1,14 @@
 class Player extends GameObject{
   boolean canShoot;
   int timePassed;
+  int immunityTimer;
   int hp;
   boolean takeDamage;
   public Player(){
     super(400,600,50,50,"player", "Player");
     canShoot = true;
     timePassed = 0;
+    immunityTimer = 0;
     hp = 25;
     takeDamage = true;
   }
@@ -47,7 +49,7 @@ class Player extends GameObject{
   }
   
   public void invinciblityTimer(int reloadTime){
-    if(millis() - timePassed >= reloadTime){
+    if(millis() - immunityTimer >= reloadTime){
       takeDamage = true;
     }
   }
@@ -68,7 +70,7 @@ class Player extends GameObject{
     for(int i = 0; i < objects.size(); i++){
       if(objects.get(i).type == "Boss" && distance(this, objects.get(i)) <= this.w/2 + objects.get(i).w/2 && takeDamage == true){
         hp -= random(1,10);
-        timePassed = millis();
+        immunityTimer = millis();
         takeDamage = false;
         if(hp<=0){
           hp = 0;
@@ -82,6 +84,6 @@ class Player extends GameObject{
   }
   public void drawHP(){
     fill(0,255,0);
-    rect(x-75, y-35, hp*5, 10);
+    rect(x-65, y-35, hp*5, 10);
   }
 }
